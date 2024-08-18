@@ -1,8 +1,8 @@
+import random
+
+
 def vsad_sportku(pocet_cisel=6, od=1, do=49):
-    '''
-    Vsazení sportky uživatelem -> vrací list {pocet_cisel} čísel
-    {od}, {do} bez opakování.
-    '''
+
     vybrana_cisla = []
     print(f"Vyber si svých {pocet_cisel} šťastných čísel.")
     while len(vybrana_cisla) < pocet_cisel:
@@ -26,3 +26,12 @@ def vsad_sportku(pocet_cisel=6, od=1, do=49):
         else:
             vybrana_cisla.append(cislo)
     return vybrana_cisla
+
+
+def losuj_sportku(pocet_cisel=6, od=1, do=49):
+    '''
+    Losování sportky -> vrací list {pocet_cisel} čísel
+    {od}, {do} bez opakování.
+    '''
+    # do + 1 -> because range excludes the right value
+    return random.sample(range(od, do + 1), pocet_cisel)
