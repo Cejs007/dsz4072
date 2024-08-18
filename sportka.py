@@ -1,17 +1,24 @@
-def vsad_sportku():
+def vsad_sportku(pocet_cisel=6, od=1, do=49):
+    '''
+    Vsazení sportky uživatelem -> vrací list {pocet_cisel} čísel
+    {od}, {do} bez opakování.
+    '''
     vybrana_cisla = []
-    while len(vybrana_cisla) < 6:
-        cislo = input("Zadej číslo od 1-49 bez opakování:")
+    print(f"Vyber si svých {pocet_cisel} šťastných čísel.")
+    while len(vybrana_cisla) < pocet_cisel:
+
+        cislo = input(f"Zadej číslo od {od}-{do} bez opakování:")
+
         # výstup input přetypovat na číslo
         if cislo.isnumeric():
             cislo = int(cislo)
         else:
-            print("Prosím příště zadej číslo!")
+            print(f"{cislo} není číslo!")
             continue
 
         # test interval
-        if not 49 >= cislo >= 1:
-            print("Špatný interval")
+        if not do >= cislo >= od:
+            print(f"{cislo} není z intervalu {od}-{do}!")
             continue
 
         if cislo in vybrana_cisla:
@@ -19,4 +26,3 @@ def vsad_sportku():
         else:
             vybrana_cisla.append(cislo)
     return vybrana_cisla
-
