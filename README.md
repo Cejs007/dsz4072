@@ -1,1 +1,1 @@
-# dsz4072
+# Repositář pro kurz DSCZ4072
