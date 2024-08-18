@@ -1,7 +1,8 @@
-from sportka import vsad_sportku, losuj_sportku
+from sportka import vsad_sportku, dokud_nevyhraju
 
 vsazeno = vsad_sportku()
-print(vsazeno)
+trvani_sec, leta, cena = dokud_nevyhraju(vsazeno)
 
-vylosovano = losuj_sportku()
-print(vylosovano)
+print(f"Losování trvalo {trvani_sec} sekund.")
+print(f"Na výhru bych čekal {leta} let.")
+print(f"Prosázel bych {cena} Kč.")
