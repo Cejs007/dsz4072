@@ -93,7 +93,7 @@ INSERT INTO cars (manufacturer, model, year, horse_power, price_per_day) VALUES
  INSERT INTO bookings (client_id, car_id, start_date,
 end_date, total_amount) VALUES
  (3, 3, '2020-07-06', '2020-07-08', 400),
- (6, 1, '2020-07-10', '2020-07-16', 1680),
+ (6, 4, '2020-07-10', '2020-07-16', 1680),
  (4, 5, '2020-07-11', '2020-07-14', 450),
  (5, 4, '2020-07-11', '2020-07-13', 600),
  (7, 3, '2020-07-12', '2020-07-14', 800),
@@ -101,10 +101,10 @@ end_date, total_amount) VALUES
  (3, 8, '2020-07-14', '2020-07-16', 380),
  (5, 2, '2020-07-15', '2020-07-18', 1080),
  (6, 3, '2020-07-16', '2020-07-20', 1120),
- (8, 1, '2020-07-16', '2020-07-19', 600),
- (1, 2, '2020-07-16', '2020-07-21', 500),
+ (8, 4, '2020-07-16', '2020-07-19', 600),
+ (3, 2, '2020-07-16', '2020-07-21', 500),
  (2, 6, '2020-07-17', '2020-07-19', 280),
- (1, 4, '2020-07-17', '2020-07-19', 720),
+ (3, 4, '2020-07-17', '2020-07-19', 720),
  (3, 7, '2020-07-18', '2020-07-21', 240),
  (5, 4, '2020-07-18', '2020-07-22', 1200);
 
@@ -113,3 +113,15 @@ select * from bookings where total_amount between 1000 and 2555;
 select client_id from clients where first_name like 'A%' and last_name like '%a';
 
 select * from clients where client_id in (3, 4);
+
+select * from bookings;
+
+SELECT clients.first_name, bookings.total_amount FROM clients, bookings;
+
+select * from bookings;
+
+SELECT clients.first_name, bookings.total_amount
+FROM clients
+LEFT JOIN bookings ON
+clients.client_id=bookings.client_id
+order by clients.first_name asc;
