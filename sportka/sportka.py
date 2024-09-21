@@ -3,6 +3,12 @@ from datetime import datetime
 
 
 def _prijmout_cislo(cislo, vybrana_cisla, od=1, do=49):
+    """
+    kontrola zadaného inputu, pokud je použitelné pro
+    vsazení sportky.
+    Vrací True nebo False, podle toho, jestli byla dodržena
+    pravidla.
+    """
     # výstup input přetypovat na číslo
     if cislo.isnumeric():
         cislo = int(cislo)
