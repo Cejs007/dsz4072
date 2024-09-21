@@ -40,3 +40,25 @@ clients_fk FOREIGN KEY (client_id)
 REFERENCES clients(client_id);
 
 show columns from bookings;
+
+insert into clients (first_name, last_name, address, city) values
+('John', 'Smith', 'Front Street 12', 'Los Angeles'),
+('Andrew', 'Jones', 'Back Street 43', 'New York');
+
+insert into clients (first_name, last_name, address, city) values ('John', 'Smith', 'Front Street 12', 'Los Angeles');
+insert into clients (first_name, last_name, address, city) values ('Andrew', 'Jones', 'Back Street 43', 'New York');
+select * from clients;
+insert into cars (manufacturer, model, year, horse_power, price_per_day) values ('Seat', 'Leon', 2016, 80, 200);
+insert into cars (manufacturer, model, year, horse_power, price_per_day) values ('Toyota', 'Avensis', 2014, 72, 100);
+select * from cars;
+insert into bookings (client_id, car_id, start_date, end_date, total_amount) values (1, 2, '2020-07-05', '2020-07-06', 100);
+insert into bookings (client_id, car_id, start_date, end_date, total_amount) values (2, 2, '2020-07-10', '2020-07-12', 200);
+select * from bookings;
+
+update clients set first_name='Michal', last_name='Maliszewski', address='ČR', city='Těrlicko' where client_id=1;
+select booking_id from bookings where client_id=1;
+delete from bookings where booking_id=1;
+delete from clients where client_id=1;
+
+insert into clients (first_name, last_name, address, city) values ('Miloš', 'Zeman', 'Vysočina', 'Les');
+insert into clients (first_name, last_name, address, city) values ('Petr', 'Pavel', 'Pražský hrad', 'Praha');
