@@ -125,3 +125,74 @@ FROM clients
 LEFT JOIN bookings ON
 clients.client_id=bookings.client_id
 order by clients.first_name asc;
+
+select count(total_amount) AS 'Amount of expensive reservations' 
+from bookings 
+where total_amount > 1000;
+
+select avg(total_amount) AS 'Average reservation cost' 
+from bookings;
+
+select min(total_amount) AS 'Minimum reservation cost' 
+from bookings;
+
+select max(total_amount) AS 'Maximum reservation cost' 
+from bookings;
+
+select client_id from clients where first_name like 'A%' or last_name like 'A%';
+select avg(total_amount) from bookings where client_id in (3, 4);
+
+with a_names as (
+SELECT clients.first_name, clients.last_name, bookings.total_amount
+FROM bookings
+INNER JOIN clients ON
+bookings.client_id=clients.client_id
+where first_name like 'A%' or last_name like 'A%')
+select avg(total_amount) from a_names;
+
+SELECT client_id, count(total_amount) as 'count', avg(total_amount) as 'avg', min(total_amount) as 'min', max(total_amount) as 'max'
+FROM bookings
+GROUP BY client_id;
+
+-- List the names of all customers with their booking costs greater than 1000.
+select clients.first_name, clients.last_name, bookings.total_amount
+from bookings 
+INNER JOIN clients ON
+bookings.client_id=clients.client_id
+where total_amount > 1000;
+
+
+-- List the city of residence of all customers who rented a car in the period 12-20.07.2020,
+-- and the engine power of the rental car does not exceed 120, sorting by the highest rental cost.
+select clients.city, bookings.start_date, bookings.end_date, cars.horse_power, bookings.total_amount
+from bookings
+LEFT JOIN clients ON
+bookings.client_id=clients.client_id
+LEFT JOIN cars ON
+bookings.car_id=cars.car_id
+where start_date >= '2020-07-12' and end_date <= '2020-07-20' and horse_power < 120
+order by total_amount desc;
+
+-- * List the number of cars with a daily rental cost of 300 or more, grouping cars by
+-- engine power and sorting from the smallest to the largest.
+select horse_power, count(car_id)
+from cars
+where price_per_day >= 300
+group by horse_power
+order by horse_power asc;
+
+-- * List the total cost of all bookings that were made between July 14 and 18, 2020.
+select sum(total_amount) as 'tržby', min(start_date) as 'od', max(end_date) as 'do'
+from bookings
+where start_date >= '2020-07-14' and end_date <= '2020-07-18';
+
+select clients.first_name, clients.last_name, 
+avg(bookings.total_amount) as 'Average_reservations_price', 
+count(bookings.car_id) as 'Number_of_rented_cars'
+from bookings
+left join clients on
+bookings.client_id=clients.client_id
+group by bookings.client_id
+having Number_of_rented_cars > 1
+order by Number_of_rented_cars desc;
+
