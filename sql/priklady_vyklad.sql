@@ -29,4 +29,7 @@ UPDATE mesta SET populace=1000000 WHERE id=3;
 
 delete from mesta where id=3;
 
+select * from mesta;
+DESCRIBE mesta;
+
 
