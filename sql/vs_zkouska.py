@@ -59,11 +59,44 @@ def vygeneruj_nahodne_lidi(pocet, vek_od=18, vek_do=28):
         # vygeneruj náhodný věk
         vek = randint(vek_od, vek_do)
         # přidej do listu lidé všechny informace jako list
-        lide.append([jmeno, prijmeni, vek])
+        lide.append((jmeno, prijmeni, vek))
     return lide
 
 # %%
-vygeneruj_nahodne_lidi(5, 80, 90)
+studenti = tuple(vygeneruj_nahodne_lidi(100))
+
+sql = "INSERT INTO student (jmeno, prijmeni, vek) VALUES "
+
+# constructing sql statment with multiple row values
+for row in studenti:
+    sql += "('{}','{}','{}'),".format(row[0], row[1], row[2])
+
+sql = sql[:-1]
+
+try:
+  cursor.execute(sql)
+  db.commit()
+  print("Úspěch")
+except Exception as error:
+  print(f"Error: {error}")
+
+# %%
+ucitele = tuple(vygeneruj_nahodne_lidi(10, 25, 80))
+
+sql = "INSERT INTO ucitel (jmeno, prijmeni, vek) VALUES "
+
+# constructing sql statment with multiple row values
+for row in ucitele:
+    sql += "('{}','{}','{}'),".format(row[0], row[1], row[2])
+
+sql = sql[:-1]
+
+try:
+  cursor.execute(sql)
+  db.commit()
+  print("Úspěch")
+except Exception as error:
+  print(f"Error: {error}")
 
 # %%
 
