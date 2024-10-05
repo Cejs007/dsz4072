@@ -99,6 +99,164 @@ except Exception as error:
   print(f"Error: {error}")
 
 # %%
+ucitele = tuple(vygeneruj_nahodne_lidi(10, 25, 80))
 
+sql = "INSERT INTO ucitel (jmeno, prijmeni, vek) VALUES "
+
+# constructing sql statment with multiple row values
+for row in ucitele:
+    sql += "('{}','{}','{}'),".format(row[0], row[1], row[2])
+
+sql = sql[:-1]
+
+try:
+  cursor.execute(sql)
+  db.commit()
+  print("Úspěch")
+except Exception as error:
+  print(f"Error: {error}")
+
+# %%
+mistnosti = []
+for i in range(3):
+    zeme = input("Zadej zemi: ")
+    mesto = input("Zadej město: ")
+    adresa = input("Zadej adresu: ")
+    ucebna = input("Zadej název učebny: ")
+    mistnosti.append((zeme, mesto, adresa, ucebna))
+
+# %%
+sql = "INSERT INTO misto (zeme, mesto, adresa, ucebna) VALUES "
+
+# constructing sql statment with multiple row values
+for row in mistnosti:
+    sql += "('{}','{}','{}','{}'),".format(row[0], row[1], row[2], row[3])
+
+sql = sql[:-1]
+
+try:
+  cursor.execute(sql)
+  db.commit()
+  print("Úspěch")
+except Exception as error:
+  print(f"Error: {error}")
+
+# %%
+sql = f"select iducitel from ucitel;"
+cursor.execute(sql)
+vysledek = cursor.fetchall()
+
+ucitelska_id = [prvek[0] for prvek in vysledek]
+
+# %%
+from random import choice
+
+# %%
+predmety = []
+for i in range(3):
+    nazev = input("Zadej nazev: ")
+    obor = input("Zadej obor: ")
+    ucitel_iducitel = choice(ucitelska_id)
+    predmety.append((nazev, obor, ucitel_iducitel))
+
+# %%
+sql = "INSERT INTO predmet (nazev, obor, ucitel_iducitel) VALUES "
+
+# constructing sql statment with multiple row values
+for row in predmety:
+    sql += "('{}','{}','{}'),".format(row[0], row[1], row[2])
+
+sql = sql[:-1]
+
+try:
+  cursor.execute(sql)
+  db.commit()
+  print("Úspěch")
+except Exception as error:
+  print(f"Error: {error}")
+
+# %%
+sql = f"select iducitel from ucitel;"
+cursor.execute(sql)
+vysledek = cursor.fetchall()
+
+ucitel_id = [prvek[0] for prvek in vysledek]
+
+sql = f"select idstudent from student;"
+cursor.execute(sql)
+vysledek = cursor.fetchall()
+
+student_id = [prvek[0] for prvek in vysledek]
+
+sql = f"select idpredmet from predmet;"
+cursor.execute(sql)
+vysledek = cursor.fetchall()
+
+predmet_id = [prvek[0] for prvek in vysledek]
+
+sql = f"select idmisto from misto;"
+cursor.execute(sql)
+vysledek = cursor.fetchall()
+
+misto_id = [prvek[0] for prvek in vysledek]
+
+# %%
+zkousky = []
+for i in range(3):
+    termin = input("Zadej termín ve formátu '2024-10-05': ")
+    online = input("Bude online: ")
+    ucitel_iducitel = choice(ucitel_id)
+    misto_idmisto = choice(misto_id)
+    student_idstudent = choice(student_id)
+    predmet_idpredmet = choice(predmet_id)
+    zkousky.append((termin, online, ucitel_iducitel, misto_idmisto, student_idstudent, predmet_idpredmet))
+
+# %%
+sql = "INSERT INTO zkouska (termin, online, ucitel_iducitel, misto_idmisto, student_idstudent, predmet_idpredmet) VALUES "
+
+# constructing sql statment with multiple row values
+for row in zkousky:
+    sql += "('{}','{}','{}','{}','{}','{}'),".format(row[0], row[1], row[2], row[3], row[4], row[5])
+
+sql = sql[:-1]
+
+try:
+  cursor.execute(sql)
+  db.commit()
+  print("Úspěch")
+except Exception as error:
+  print(f"Error: {error}")
+
+# %%
+sql = f"select idzkouska from zkouska;"
+cursor.execute(sql)
+vysledek = cursor.fetchall()
+
+zkouska_id = [prvek[0] for prvek in vysledek]
+
+# %%
+vysledky = []
+for i in range(3):
+    prospel = input("Zadej prospel: ")
+    body = input("Zadej body: ")
+    komentar = input("Zadej komentar: ")
+    zkouska_idzkouska = choice(zkouska_id)
+    vysledky.append((prospel, body, komentar, zkouska_idzkouska))
+
+# %%
+sql = "INSERT INTO vysledek (prospel, body, komentar, zkouska_idzkouska) VALUES "
+
+# constructing sql statment with multiple row values
+for row in vysledky:
+    sql += "('{}','{}','{}','{}'),".format(row[0], row[1], row[2], row[3])
+
+sql = sql[:-1]
+
+try:
+  cursor.execute(sql)
+  db.commit()
+  print("Úspěch")
+except Exception as error:
+  print(f"Error: {error}")
 
 
