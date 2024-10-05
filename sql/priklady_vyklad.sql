@@ -32,4 +32,7 @@ delete from mesta where id=3;
 select * from mesta;
 DESCRIBE mesta;
 
+select * from starostove;
+DESCRIBE starostove;
+
 
